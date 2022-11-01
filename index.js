@@ -95,4 +95,15 @@ app.get("/authors", (req, res) => {
   });
 });
 
+app.delete("/authors/:id", (req, res) => {
+  const authorId = req.params.id;
+  connection.query(
+    `delete from author where id = ${authorId}`,
+    function (err, rows, fields) {
+      if (err) res.sendStatus(500);
+      else res.sendStatus(204);
+    }
+  );
+});
+
 app.listen(port, () => console.log(`Starting api on port ${port}...`));
